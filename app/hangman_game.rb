@@ -1,74 +1,56 @@
-require 'pry'
 require_relative 'hangman_graphic.rb'
 
-class Game < Graphic
-
-
+class Game < GameFunctions
+  attr_accessor :letters_guessed, :random_word, :correct_letters,
+                :amount_wrong_turns, :spaces
+  
   def initialize
     @letters_guessed = []
-    @random_word = 'hello'
+    @random_word = random_word_generator
     @correct_letters = []
-    @final_word = []
     @amount_wrong_turns = 0
-    self.start
+    @spaces = @random_word.split(//).map {|letter| "-"}.join(" ")
+    welcome
+    load_or_new(action_input)
   end
 
-  def start
-    puts "welcome to hangman, please enter NEW GAME to start a
-          new game, or LOAD, to continue a saved game."
-    user_input = gets.chomp.downcase
-    if user_input == "new game"
-      new_game
-    elsif user_input == "load"
-      # load_game
-    else
-      puts "your entry was invalid, try again."
-      start
+  def game_flow
+
+    
+    if game_won?
+      won_the_game
+      return
+    elsif game_lost?
+      lost_the_game
+      return
     end
-  end
-
-  def new_game
-    puts "PLEASE ENTER A LETTER TO BEGIN"
+    
+    display_lives_available
     hangman_graphic
-    spaces
-    check_letter
+        
+    puts "   " + spaces
+    puts "     "
+
+    user_input = input
 
 
-  end
-  def check_letter
-    user_letter = input
-    # @correct_letters = spaces.split("")
-    @letters_guessed = []
-    @random_word.split("").each.with_index do |letter, idx|
-      if letter == user_letter
-        @letters_guessed << letter 
-        @correct_letters[idx + 1] = letter
-      end
+     # game_flow traffic
+    if user_input.downcase == 'save'
+      save_game
+      return
+    elsif letter_exist?(user_input)
+      congratulate
+      fill_in_spaces
+      game_flow      
+    else 
+      ashame
+      increase_wrong_turns
+      game_flow
+      
     end
-    puts "CORRECT, keep going"
-    puts @correct_letters
+
   end
-
-  def turn
-    puts "enter in another letter"
-  end
-
-
-  def input
-    user_input = gets.chomp.downcase
-  end
-
-  def spaces
-    lines_array = []
-    @random_word.split("").map do |letter|
-     lines_array << "-"
-    end
-    puts lines_array.join(" ")
-    return lines_array.join(" ")
-  end
-
 
 
 end
-new_game = Game.new
-# binding.pry
+
