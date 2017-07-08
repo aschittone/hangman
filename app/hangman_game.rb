@@ -15,8 +15,12 @@ class Game < GameFunctions
   end
 
   def game_flow
+  ############################# 
+  # 
+  # checks if game won or lost
+  #  
+  #############################
 
-    
     if game_won?
       won_the_game
       return
@@ -24,17 +28,23 @@ class Game < GameFunctions
       lost_the_game
       return
     end
-    
-    display_lives_available
-    hangman_graphic
-        
-    puts "   " + spaces
-    puts "     "
+
+  #############################
+  #
+  # displays 'please enter a letter...' + lives available + hangman graphic + spaces/letters_found ---> then asks for input again
+  #
+  #############################
+
+    recurrent_message
 
     user_input = input
 
+  #############################
+  #
+  #  evaluates user input and acts accordingly 
+  #
+  #############################
 
-     # game_flow traffic
     if user_input.downcase == 'save'
       save_game
       return

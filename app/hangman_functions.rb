@@ -1,11 +1,10 @@
 require_relative 'hangman_graphic.rb'
 
 class GameFunctions < Graphic
-  attr_accessor :spaces, :random_word, :amount_wrong_turns
   
   def welcome
     puts "      "
-    puts "  THE " + "HANGAMAN ".yellow + "GAME"
+    puts "  THE " + "HANGMAN ".yellow + "GAME"
     hangman_graphic
     puts "welcome to hangman, please enter NEW GAME to start a
     new game, or LOAD, to continue a saved game. (type SAVE at any point to
@@ -64,17 +63,28 @@ class GameFunctions < Graphic
     hangman_graphic
     display_lives_available
     puts "       "
-    puts "YOU SHOULD TRY IT AGAIN!"
+    puts "the word was:"
     puts "       "
+    puts "            " + random_word.upcase.green
+    puts "       "
+    puts "YOU SHOULD TRY IT AGAIN!"
+
   end
 
   def recurrent_message
     puts "PLEASE ENTER A LETTER TO BEGIN"
     puts "      "
-    puts "       ♡ = #{lives_left}"
+    puts "       ♡".red + " = #{lives_left}"
+
+    hangman_graphic
+    
+    puts "   " + spaces
+    puts "     "
+
   end
 
   def action_input
+    # ask user for 'save' or 'load' action
     @action_input = gets.chomp.downcase
   end
 
@@ -82,15 +92,21 @@ class GameFunctions < Graphic
     puts "      GAME LOST".red
     hangman_graphic
     puts "       "
+    puts "the word was:"
+    puts "       "
+    puts "            " + random_word.upcase.green
+    puts "    "
     puts "YOU SHOULD TRY IT AGAIN!"
     puts "       "
   end
 
   def game_won?
+    # true if spaces now is the same as random word generated
     spaces.gsub(/\s+/, "") == random_word
   end
   
   def game_lost?
+    # true if amount of wrong turns is greater or equals 6
     amount_wrong_turns >= 6  
   end
   
@@ -115,7 +131,6 @@ class GameFunctions < Graphic
       @letters_guessed.include?(letter) ? letter : "-"
     end.join(" ")
   end
-
 
   def input
     puts "PLEASE ENTER A LETTER OR TYPE SAVE TO SAVE AND QUIT THE GAME"
