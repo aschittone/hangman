@@ -5,18 +5,18 @@ class Game < Graphic
 
 
   def initialize
-    @letters_guessed = []
     @random_word = 'hello'
     @correct_letters = []
-    @final_word = []
+    @guessed_letters = []
     @amount_wrong_turns = 0
-    self.start
+    start
   end
 
   def start
     puts "welcome to hangman, please enter NEW GAME to start a
-          new game, or LOAD, to continue a saved game."
-    user_input = gets.chomp.downcase
+    new game, or LOAD, to continue a saved game. (type SAVE at any point to
+    save a game and continue at a later time)"
+    user_input = input
     if user_input == "new game"
       new_game
     elsif user_input == "load"
@@ -28,47 +28,72 @@ class Game < Graphic
   end
 
   def new_game
-    puts "PLEASE ENTER A LETTER TO BEGIN"
+    puts "We've chosen a random word, PLEASE ENTER A LETTER TO BEGIN"
+    sub_letter(@random_word, " ")
     hangman_graphic
-    spaces
-    check_letter
-
-
+    game_flow
   end
-  def check_letter
-    user_letter = input
-    # @correct_letters = spaces.split("")
-    @letters_guessed = []
-    @random_word.split("").each.with_index do |letter, idx|
-      if letter == user_letter
-        @letters_guessed << letter 
-        @correct_letters[idx + 1] = letter
+
+  def game_flow
+    word = @random_word
+    while @amount_wrong_turns < 5 do
+      letter = input
+      if check_letter(letter)
+        @correct_letters << letter
+        @guessed_letters << letter
+        if @correct_letters.sort == @random_word.split("").sort
+          puts "you're a winner"
+          start
+        else
+          puts "Correct, enter in a new letter!"
+        end
+      elsif letter.downcase == "save"
+        save
+      else
+        puts "Wrong, guess another letter"
+        @guessed_letters << letter
+        @amount_wrong_turns += 1
       end
+      puts "here are the letters that you've guessed #{@guessed_letters}"
+      sub_letter(word, letter)
+      hangman_graphic
+      # binding.pry
+      # index of letter in correct word == @random_word.index(letter)
     end
-    puts "CORRECT, keep going"
-    puts @correct_letters
+    puts "you LOST"
+    start
   end
 
-  def turn
-    puts "enter in another letter"
+
+  def sub_letter(word, guessed_letter)
+    new_array = []
+    word.split("").map do |letter|
+          if guessed_letter == letter
+            new_array << guessed_letter
+          else
+            new_array << "_"
+          end
+        end
+      puts new_array.join(" ")
   end
 
+  def save
+
+  end
+
+  def load_game
+
+  end
 
   def input
     user_input = gets.chomp.downcase
   end
 
-  def spaces
-    lines_array = []
-    @random_word.split("").map do |letter|
-     lines_array << "-"
-    end
-    puts lines_array.join(" ")
-    return lines_array.join(" ")
+  def check_letter(letter)
+    return @random_word.include?(letter)
   end
 
-
-
 end
+
 new_game = Game.new
 # binding.pry
