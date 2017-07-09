@@ -90,4 +90,18 @@ class Graphic
         puts "      "
       end
     end
+    def hangman_graphic_won
+        puts ""
+        puts "      __________"
+        puts "      |        |"
+        puts "      |        |"
+        puts "               |"
+        puts "      0".green + "        |"
+        puts "     \\|/".green + "       |"
+        puts "      |".green + "        |"
+        puts "     / \\".green + "       |"  
+        puts "    ============"
+        puts "      "
+    end
 end
+

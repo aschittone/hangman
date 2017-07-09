@@ -12,6 +12,7 @@ class GameFunctions < Graphic
   end
 
   def load_or_new(desired_action)
+    # traffic for load or save game
     if desired_action == 'new game'
       game_flow
     elsif desired_action == 'load game'
@@ -20,24 +21,33 @@ class GameFunctions < Graphic
   end
 
   def save_game
+    # creates hash of instance attributes with values and 
+    # saves it on JSON file for later retrieval
     attributes = {letters_guessed: letters_guessed,random_word: random_word, correct_letters: correct_letters, amount_wrong_turns: amount_wrong_turns, spaces: spaces}
     memory = File.write('./config/memory.json', attributes.to_json)
   end
 
   def load_game
+    # reads the JSON file containing the hash of attributes and values 
+    # parses the file with JSON
     memory = JSON.parse(IO.read('./config/memory.json'))
+
+    # iterates through the hash and assigns each instance variable to respective value
     memory.each do |attribute, value|
       self.send("#{attribute}=", value)
     end
     puts "    "
     puts "GAME SUCCESSFULLY LOADED".green
     puts "    "
+    # run game with game_flow
     game_flow
   end
 
   def random_word_generator
-     words = File.read('./config/words.json').split(" ")
-     words.sample
+    # file contains list of 100 words
+    words = File.read('./config/words.json').split(" ")
+    words.sample
+    "hello"
   end
   
   def lives_left
@@ -60,7 +70,7 @@ class GameFunctions < Graphic
   
   def won_the_game
     puts "      GAME WON!!!".green
-    hangman_graphic
+    hangman_graphic_won
     display_lives_available
     puts "       "
     puts "the word was:"
@@ -133,7 +143,7 @@ class GameFunctions < Graphic
   end
 
   def input
-    puts "PLEASE ENTER A LETTER OR TYPE SAVE TO SAVE AND QUIT THE GAME"
+    puts "PLEASE ENTER A LETTER TO BEGIN"
     puts "      "
     @user_input = gets.chomp.downcase
   end
