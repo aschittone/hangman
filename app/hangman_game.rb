@@ -28,7 +28,8 @@ class Game < GameFunctions
     end
 
   #############################
-  # displays 'please enter a letter...' + lives available + hangman graphic + spaces/letters_found ---> then asks for input again
+  # displays 'please enter a letter...' + lives available + hangman graphic
+  # + spaces/letters_found ---> then asks for input again
   #############################
 
     recurrent_message
