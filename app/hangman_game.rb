@@ -1,7 +1,7 @@
 require 'pry'
-require_relative 'hangman_graphic.rb'
+require_relative 'game_functions.rb'
 
-class Game < Graphic
+class Game < GameFunctions
 
 
   def initialize
@@ -9,84 +9,28 @@ class Game < Graphic
     @correct_letters = []
     @guessed_letters = []
     @amount_wrong_turns = 0
+    @won_games = 0
+    @lost_games = 0
     start
   end
 
-  def start
-    puts "welcome to hangman, please enter NEW GAME to start a
-    new game, or HISTORY, to see how many games you've won or lost."
-    user_input = input
-    if user_input == "new game"
-      new_game
-    elsif user_input == "history"
-      # load_game
-    else
-      puts "your entry was invalid, try again."
-      start
-    end
-  end
 
-  def new_game
-    puts "We've chosen a random word, PLEASE ENTER A LETTER TO BEGIN"
-    sub_letter
-    hangman_graphic
-    game_flow
-  end
 
   def game_flow
-    while @amount_wrong_turns < 5 do
-      if @new_array.sort == @random_word.split("").sort
-        puts "you're a winner"
-        start
+    while @amount_wrong_turns < 6 do
+      if check_if_correct
+        winner
+        @won_games += 1
       else
-        letter = input
-        if check_letter(letter)
-          @correct_letters << letter
-          @guessed_letters << letter
-          # binding.pry
-          puts "Correct, enter in a new letter!"
-
-        elsif letter.downcase == "save"
-          save
-        else
-          puts "Wrong, guess another letter"
-          @guessed_letters << letter
-          @amount_wrong_turns += 1
-        end
+        continue_game
       end
-      puts "here are the letters that you've guessed #{@guessed_letters}"
-      sub_letter
-      hangman_graphic
-      # binding.pry
-      # index of letter in correct word == @random_word.index(letter)
+      sub_letter_and_graphic
     end
-    puts "you LOST"
-    start
+    loser
+    @lost_games += 1
   end
 
-
-  def sub_letter
-    @new_array = []
-    # binding.pry
-    @random_word.split("").map do |letter|
-      if @correct_letters.include?(letter)
-        @new_array << letter
-      else
-        @new_array << "_"
-      end
-    end
-    puts @new_array.join(" ")
-  end
-
-  def input
-    user_input = gets.chomp.downcase
-  end
-
-  def check_letter(letter)
-    return @random_word.include?(letter)
-  end
 
 end
 
 new_game = Game.new
-# binding.pry
