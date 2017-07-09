@@ -5,7 +5,7 @@ class Game < Graphic
 
 
   def initialize
-    @random_word = 'expedition'
+    @random_word = 'hello'
     @correct_letters = []
     @guessed_letters = []
     @amount_wrong_turns = 0
@@ -35,24 +35,26 @@ class Game < Graphic
 
   def game_flow
     while @amount_wrong_turns < 5 do
-      letter = input
-      if check_letter(letter)
-        @correct_letters << letter
-        @guessed_letters << letter
-      elsif letter.downcase == "save"
-        save
-      else
-        puts "Wrong, guess another letter"
-        @guessed_letters << letter
-        @amount_wrong_turns += 1
-      end
-      puts "here are the letters that you've guessed #{@guessed_letters}"
-      if @correct_letters.sort == @random_word.split("").sort
+      if @new_array.sort == @random_word.split("").sort
         puts "you're a winner"
         start
       else
-        puts "Correct, enter in a new letter!"
+        letter = input
+        if check_letter(letter)
+          @correct_letters << letter
+          @guessed_letters << letter
+          # binding.pry
+          puts "Correct, enter in a new letter!"
+
+        elsif letter.downcase == "save"
+          save
+        else
+          puts "Wrong, guess another letter"
+          @guessed_letters << letter
+          @amount_wrong_turns += 1
+        end
       end
+      puts "here are the letters that you've guessed #{@guessed_letters}"
       sub_letter
       hangman_graphic
       # binding.pry
@@ -64,16 +66,16 @@ class Game < Graphic
 
 
   def sub_letter
-    new_array = []
+    @new_array = []
     # binding.pry
     @random_word.split("").map do |letter|
       if @correct_letters.include?(letter)
-        new_array << letter
+        @new_array << letter
       else
-        new_array << "_"
+        @new_array << "_"
       end
     end
-    puts new_array.join(" ")
+    puts @new_array.join(" ")
   end
 
   def input
