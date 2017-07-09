@@ -29,13 +29,12 @@ class Game < Graphic
 
   def new_game
     puts "We've chosen a random word, PLEASE ENTER A LETTER TO BEGIN"
-    sub_letter(@random_word, " ")
+    sub_letter
     hangman_graphic
     game_flow
   end
 
   def game_flow
-    word = @random_word
     while @amount_wrong_turns < 5 do
       letter = input
       if check_letter(letter)
@@ -55,7 +54,7 @@ class Game < Graphic
         @amount_wrong_turns += 1
       end
       puts "here are the letters that you've guessed #{@guessed_letters}"
-      sub_letter(word, letter)
+      sub_letter
       hangman_graphic
       # binding.pry
       # index of letter in correct word == @random_word.index(letter)
@@ -65,16 +64,17 @@ class Game < Graphic
   end
 
 
-  def sub_letter(word, guessed_letter)
+  def sub_letter
     new_array = []
-    word.split("").map do |letter|
-          if guessed_letter == letter
-            new_array << guessed_letter
-          else
-            new_array << "_"
-          end
-        end
-      puts new_array.join(" ")
+    # binding.pry
+    @random_word.split("").map do |letter|
+      if @correct_letters.include?(letter)
+        new_array << letter
+      else
+        new_array << "_"
+      end
+    end
+    puts new_array.join(" ")
   end
 
   def save
