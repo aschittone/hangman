@@ -5,7 +5,7 @@ class Game < Graphic
 
 
   def initialize
-    @random_word = 'hello'
+    @random_word = 'expedition'
     @correct_letters = []
     @guessed_letters = []
     @amount_wrong_turns = 0
@@ -14,12 +14,11 @@ class Game < Graphic
 
   def start
     puts "welcome to hangman, please enter NEW GAME to start a
-    new game, or LOAD, to continue a saved game. (type SAVE at any point to
-    save a game and continue at a later time)"
+    new game, or HISTORY, to see how many games you've won or lost."
     user_input = input
     if user_input == "new game"
       new_game
-    elsif user_input == "load"
+    elsif user_input == "history"
       # load_game
     else
       puts "your entry was invalid, try again."
@@ -40,12 +39,6 @@ class Game < Graphic
       if check_letter(letter)
         @correct_letters << letter
         @guessed_letters << letter
-        if @correct_letters.sort == @random_word.split("").sort
-          puts "you're a winner"
-          start
-        else
-          puts "Correct, enter in a new letter!"
-        end
       elsif letter.downcase == "save"
         save
       else
@@ -54,6 +47,12 @@ class Game < Graphic
         @amount_wrong_turns += 1
       end
       puts "here are the letters that you've guessed #{@guessed_letters}"
+      if @correct_letters.sort == @random_word.split("").sort
+        puts "you're a winner"
+        start
+      else
+        puts "Correct, enter in a new letter!"
+      end
       sub_letter
       hangman_graphic
       # binding.pry
@@ -75,14 +74,6 @@ class Game < Graphic
       end
     end
     puts new_array.join(" ")
-  end
-
-  def save
-
-  end
-
-  def load_game
-
   end
 
   def input
