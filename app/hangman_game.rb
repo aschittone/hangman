@@ -5,7 +5,7 @@ class Game < GameFunctions
 
 
   def initialize
-    @random_word = 'hello'
+    @random_word = 'dwarves'
     @correct_letters = []
     @guessed_letters = []
     @amount_wrong_turns = 0

@@ -65,7 +65,7 @@ class GameFunctions
 
   def winner
     puts "you're a winner"
-    start
+    goodbye
   end
 
   def continue_game
@@ -86,11 +86,11 @@ class GameFunctions
 
   def loser
     puts "you LOST"
-    start
+    goodbye
   end
 
   def hangman_graphic
-      case @amount_wrong_turns
+    case @amount_wrong_turns
       when 0
         puts ""
         puts "      __________"
@@ -106,7 +106,7 @@ class GameFunctions
         puts ""
         puts "      __________"
         puts "      |        |"
-        puts "      O        |"
+        puts "      0        |"
         puts "               |"
         puts "               |"
         puts "               |"
@@ -117,10 +117,10 @@ class GameFunctions
         puts ""
         puts "      __________"
         puts "      |        |"
-        puts "      O        |"
+        puts "      0        |"
         puts "      |        |"
         puts "      |        |"
-        puts "      |        |"
+        puts "               |"
         puts "               |"
         puts "               |"
         puts "    ============"
@@ -128,10 +128,10 @@ class GameFunctions
         puts ""
         puts "      __________"
         puts "      |        |"
-        puts "      O        |"
+        puts "      0        |"
         puts "      |/       |"
         puts "      |        |"
-        puts "      |        |"
+        puts "               |"
         puts "               |"
         puts "               |"
         puts "    ============"
@@ -139,10 +139,10 @@ class GameFunctions
         puts ""
         puts "      __________"
         puts "      |        |"
-        puts "      O        |"
-        puts "     \|/       |"
+        puts "      0        |"
+        puts "     \\|/       |"
         puts "      |        |"
-        puts "      |        |"
+        puts "               |"
         puts "               |"
         puts "               |"
         puts "    ============"
@@ -150,24 +150,25 @@ class GameFunctions
         puts ""
         puts "      __________"
         puts "      |        |"
-        puts "      O        |"
-        puts "     \|/       |"
-        puts "      |        |"
+        puts "      0        |"
+        puts "     \\|/       |"
         puts "      |        |"
         puts "     /         |"
+        puts "               |"
         puts "               |"
         puts "    ============"
       when 6
         puts ""
         puts "      __________"
         puts "      |        |"
-        puts "      O        |"
-        puts "     \|/       |"
+        puts "      0        |"
+        puts "     \\|/       |"
         puts "      |        |"
-        puts "      |        |"
-        puts "     / \       |"
+        puts "     / \\       |"
+        puts "               |"
         puts "               |"
         puts "    ============"
       end
     end
+
 end
