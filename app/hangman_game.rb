@@ -34,10 +34,7 @@ class Game < GameFunctions
   #############################
   #  evaluates user input and acts accordingly
   #############################
-    if user_input.downcase == 'save'
-      save_game
-      return
-    elsif user_input.downcase == "exit"
+    if user_input.downcase == "exit"
       goodbye
     elsif letter_exist?(user_input)
       winner_message

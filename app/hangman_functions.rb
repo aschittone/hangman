@@ -40,7 +40,7 @@ class GameFunctions < Graphic
 
   def random_word_generator
     # file contains list of 100 words
-    words = File.read('../config/words.json').split(" ")
+    words = File.read('./config/words.json').split(" ")
     words.sample
   end
 
