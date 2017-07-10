@@ -34,10 +34,6 @@ class GameFunctions < Graphic
     game_flow
   end
 
-  def check_name?(name)
-    self.class.all_users.include?(name)
-  end
-
   def random_word_generator
     # file contains list of 100 words
     words = File.read('./config/words.json').split(" ")
@@ -94,13 +90,13 @@ class GameFunctions < Graphic
   def lost_the_game
     puts "YOU LOST".red
     hangman_graphic
-    puts "       "
+    puts space
     puts "The word was:"
-    puts "       "
+    puts space
     puts "            " + random_word.upcase.green
     puts "    "
     puts "YOU SHOULD TRY IT AGAIN!"
-    puts "       "
+    puts space
     self.games_lost += 1
     reset
   end
@@ -147,7 +143,6 @@ class GameFunctions < Graphic
       input
     end
   end
-  # end
 
   def input
     puts "PLEASE ENTER A LETTER TO BEGIN:"
