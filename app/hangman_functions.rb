@@ -141,10 +141,20 @@ class GameFunctions < Graphic
     end
   end
 
+  def guessed_letter_validator
+    if self.letters_guessed.include?(@user_input)
+      puts "YOU ALREADY GUESSED THAT LETTER, ENTER IN A NEW ONE:"
+      input
+    end
+  end
+  # end
+
   def input
     puts "PLEASE ENTER A LETTER TO BEGIN:"
     puts space
     @user_input = gets.chomp.downcase
+    guessed_letter_validator
+    @user_input
   end
 
   def space
