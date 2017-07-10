@@ -1,7 +1,9 @@
+require_relative 'load_save_feature.rb'
 require_relative 'hangman_graphic.rb'
 
 class Game < GameFunctions
   attr_accessor :letters_guessed, :random_word, :amount_wrong_turns, :spaces, :user_name, :games_won, :games_lost
+  @@games = []
 
   def initialize
     @letters_guessed = []
@@ -10,6 +12,7 @@ class Game < GameFunctions
     @games_won = 0
     @games_lost = 0
     @spaces = @random_word.split(//).map {|letter| "-"}.join(" ")
+    @@games << self
     welcome
     user_choice(action_input)
   end
@@ -36,6 +39,8 @@ class Game < GameFunctions
   #############################
     if user_input.downcase == "exit"
       goodbye
+    elsif user_input.downcase == 'save'
+      save_game
     elsif letter_exist?(user_input)
       winner_message
       fill_in_spaces

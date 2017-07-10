@@ -1,3 +1,5 @@
+require_relative 'user.rb'
+require_relative 'load_save_feature.rb'
 require_relative 'hangman_graphic.rb'
 
 class GameFunctions < Graphic
@@ -6,7 +8,32 @@ class GameFunctions < Graphic
     puts space
     puts "  THE " + "HANGMAN ".yellow + "GAME"
     hangman_graphic
-    puts "Welcome to hangman, please enter " + "NEW GAME".green + " to start a new game, " + "HISTORY".green  + ", to see how many games you have won or lost, or " + "EXIT".red + " to exit out of the game (all history will be lost)"
+    puts "HELLO, PlEASE ENTER YOUR NAME"
+    user = gets.chomp
+    if check_json_for_name(user) == true
+      history
+    end
+    history
+    self.user_name = user
+    puts "Welcome to hangman #{self.user_name}, please enter " + "NEW GAME".green + " to start a new game, " + "HISTORY".green  + ", to see how many games you have won or lost, or " + "EXIT".red + " to exit out of the game (all history will be lost)"
+  end
+
+  def history
+    binding.pry
+
+    memory = JSON.parse(IO.read('./config/memory.json'))
+    memory.each do |hash|
+    end
+  end
+
+  def check_json_for_name(user_name)
+    memory = JSON.parse(IO.read('./config/memory.json'))
+    memory.map do |key, value|
+      if memory['user_name'] == user_name
+        return true
+      end
+    end
+    return false
   end
 
   def user_choice(desired_action)
@@ -164,6 +191,32 @@ class GameFunctions < Graphic
   def invalid_message_restart
     puts "YOUR ENTRY WAS INVALID, PLEASE TRY AGAIN"
     user_choice(action_input)
+  end
+
+  def save_game
+    # creates hash of instance attributes with values and
+    # saves it on JSON file for later retrieval
+    attributes = {games_won: games_won, games_lost: games_lost, user_name: user_name, letters_guessed: letters_guessed,random_word: random_word, amount_wrong_turns: amount_wrong_turns, spaces: spaces}
+    exsisting_memory = JSON.parse(IO.read('./config/memory.json'))
+    # binding.pry
+    memory = File.write('./config/memory.json', '[' + exsisting_memory.to_json + attributes.to_json + ']')
+    puts "YOUR GAME HAS BEEN SAVED SUCCESSFULLY!"
+  end
+
+  def load_game
+    # reads the JSON file containing the hash of attributes and values
+    # parses the file with JSON
+    memory = JSON.parse(IO.read('../config/memory.json'))
+
+    # iterates through the hash and assigns each instance variable to respective value
+    memory.each do |attribute, value|
+      self.send("#{attribute}=", value)
+    end
+    puts "    "
+    puts "GAME SUCCESSFULLY LOADED".green
+    puts "    "
+    # run game with game_flow
+    game_flow
   end
 
 end

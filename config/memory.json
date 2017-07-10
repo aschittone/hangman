@@ -1,1 +1,1 @@
-{"letters_guessed":["h"],"random_word":"hello","correct_letters":[],"amount_wrong_turns":3,"spaces":"h - - - -"}
+[{"games_won":0,"games_lost":0,"user_name":"andrew","letters_guessed":["e","c","s"],"random_word":"myatonia","amount_wrong_turns":3,"spaces":"_ _ _ _ _ _ _ _"}{"games_won":0,"games_lost":0,"user_name":"carlos","letters_guessed":["carlos","e","c","s","a"],"random_word":"overcold","amount_wrong_turns":3,"spaces":"_ _ e _ c _ _ _"}]
