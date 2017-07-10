@@ -29,9 +29,9 @@ class GameFunctions < Graphic
     self.random_word = random_word_generator
     @letters_guessed = []
     @amount_wrong_turns = 0
+    self.spaces = @random_word.split(//).map {|letter| "-"}.join(" ")
     welcome
     user_choice(action_input)
-    game_flow
   end
 
   def random_word_generator
@@ -73,7 +73,7 @@ class GameFunctions < Graphic
     puts space
     puts "Here are the letters that you've guessed: #{self.letters_guessed} "
     puts space
-    puts "        ♡".red + " = #{lives_left}"
+    puts "        ❤".red + " = #{lives_left}"
     hangman_graphic
     puts "    "+ spaces
   end
@@ -139,13 +139,13 @@ class GameFunctions < Graphic
 
   def guessed_letter_validator
     if self.letters_guessed.include?(@user_input)
-      puts "YOU ALREADY GUESSED THAT LETTER, ENTER IN A NEW ONE:"
+      puts "YOU ALREADY GUESSED THAT LETTER!"
       input
     end
   end
 
   def input
-    puts "PLEASE ENTER A LETTER TO BEGIN:"
+    puts "PLEASE ENTER A LETTER:"
     puts space
     @user_input = gets.chomp.downcase
     guessed_letter_validator
