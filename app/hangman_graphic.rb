@@ -4,7 +4,6 @@ class Graphic
   def hangman_graphic
       case @amount_wrong_turns
       when 0
-        puts ""
         puts "      __________".green
         puts "      |        |".green
         puts "               |".green
@@ -16,7 +15,6 @@ class Graphic
         puts "    ============".green
         puts "      "
       when 1
-        puts ""
         puts "      __________"
         puts "      |        |"
         puts "      0".green + "        |"
@@ -29,7 +27,6 @@ class Graphic
         puts "      "
 
       when 2
-        puts ""
         puts "      __________"
         puts "      |        |"
         puts "      0".green + "        |"
@@ -41,7 +38,6 @@ class Graphic
         puts "    ============"
         puts "      "
       when 3
-        puts ""
         puts "      __________"
         puts "      |        |"
         puts "      0".green + "        |"
@@ -53,7 +49,6 @@ class Graphic
         puts "    ============"
         puts "      "
       when 4
-        puts ""
         puts "      __________"
         puts "      |        |"
         puts "      0".green + "        |"
@@ -65,7 +60,6 @@ class Graphic
         puts "    ============"
         puts "      "
       when 5
-        puts ""
         puts "      __________"
         puts "      |        |"
         puts "      0".green + "        |"
@@ -77,7 +71,6 @@ class Graphic
         puts "    ============"
         puts "      "
       when 6
-        puts ""
         puts "      __________"
         puts "      |        |"
         puts "      0".red + "        |"
@@ -91,7 +84,6 @@ class Graphic
       end
     end
     def hangman_graphic_won
-        puts ""
         puts "      __________"
         puts "      |        |"
         puts "      |        |"
@@ -99,9 +91,8 @@ class Graphic
         puts "      0".green + "        |"
         puts "     \\|/".green + "       |"
         puts "      |".green + "        |"
-        puts "     / \\".green + "       |"  
+        puts "     / \\".green + "       |"
         puts "    ============"
         puts "      "
     end
 end
-
