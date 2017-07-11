@@ -4,17 +4,17 @@ def save_game
   # creates hash of instance attributes with values and
   # saves it on JSON file for later retrieval
   attributes = user_name.to_s {
-    games_won: games_won, 
-    games_lost: games_lost, 
-    user_name: user_name, 
+    games_won: games_won,
+    games_lost: games_lost,
+    user_name: user_name,
     letters_guessed: letters_guessed,
-    random_word: random_word, 
-    correct_letters: correct_letters, 
-    amount_wrong_turns: amount_wrong_turns, 
+    random_word: random_word,
+    correct_letters: correct_letters,
+    amount_wrong_turns: amount_wrong_turns,
     spaces: spaces
   }
   exsisting_memory = JSON.parse(IO.read('../config/memory.json'))
-  binding.pry
+  # binding.pry
   memory = File.write('../config/memory.json', attributes)
   puts "YOUR GAME HAS BEEN SAVED SUCCESSFULLY!"
 end
