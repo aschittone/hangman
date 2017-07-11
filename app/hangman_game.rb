@@ -1,7 +1,8 @@
 require_relative 'hangman_graphic.rb'
 
 class Game < GameFunctions
-  attr_accessor :letters_guessed, :random_word, :amount_wrong_turns, :spaces, :user_name, :games_won, :games_lost
+  attr_accessor :letters_guessed, :random_word, 
+                :amount_wrong_turns, :spaces, :user_name, :games_won, :games_lost
 
   def initialize
     @letters_guessed = []
@@ -9,9 +10,8 @@ class Game < GameFunctions
     @amount_wrong_turns = 0
     @games_won = 0
     @games_lost = 0
-    @spaces = @random_word.split(//).map {|letter| "-"}.join(" ")
+    @spaces = @random_word.split(//).map {|letter| "_"}.join(" ")
     welcome
-    user_choice(action_input)
   end
 
   def game_flow
@@ -34,7 +34,11 @@ class Game < GameFunctions
   #############################
   #  evaluates user input and acts accordingly
   #############################
-    if user_input.downcase == "exit"
+    if user_input.downcase == "1"
+      save
+    elsif user_input.downcase == "2"
+      user_choice
+    elsif user_input.downcase == "3"
       goodbye
     elsif letter_exist?(user_input)
       winner_message
