@@ -5,4 +5,4 @@ All code for game functions are in the app folder. The config folder contains th
 
 The bin folder includes the run.rb file, which includes the necessary gems to construct/run the game, and starts a new GAME instance upon running the file from the command line.
 
-The GAME class inherits both the Graphic and GameFunctions classes, to include full functionality when a game instance is created. 
+The GAME class inherits both the Graphic and GameFunctions classes, to include full functionality when a game instance is created.

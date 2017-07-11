@@ -499,8 +499,8 @@ class Graphic
         puts "      "
         puts "      0".yellow
         puts "     \\|/".yellow
-        puts "      |".yellow 
-        puts "     / \\".yellow 
+        puts "      |".yellow
+        puts "     / \\".yellow
         puts ""
         puts ""
         puts ""
@@ -557,8 +557,8 @@ class Graphic
         puts "      "
         puts "      0".green
         puts "     \\|-".green
-        puts "      |".green 
-        puts "     / \\".green 
+        puts "      |".green
+        puts "     / \\".green
         puts ""
         puts ""
         puts ""
@@ -625,7 +625,7 @@ class Graphic
         puts ""
         puts "      "
 
-        
+
     end
 
     def game_stats
@@ -681,27 +681,6 @@ class Graphic
         puts ""
         puts ""
         puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
 
         puts "                      YOU HAVE LOST".red
         puts ""
@@ -710,13 +689,7 @@ class Graphic
         puts "                       The word was"
         puts ""
         puts ""
-        puts "                        " + random_word.upcase.green    
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-
+        puts "                        " + random_word.upcase.green
         puts ""
         puts ""
         puts ""
@@ -725,21 +698,11 @@ class Graphic
         puts ""
         puts ""
         puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-
+        
         sleep(3)
         hangman_graphic
         puts space
-        
+
         puts space
         puts "    "
         puts "YOU SHOULD TRY IT AGAIN!"
@@ -759,27 +722,6 @@ class Graphic
         puts ""
         puts ""
         puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
 
         puts "                      YOU HAVE WON!".green
         puts ""
@@ -788,23 +730,7 @@ class Graphic
         puts "                       The word was"
         puts ""
         puts ""
-        puts "                        " + random_word.upcase.green    
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
-        puts ""
+        puts "                        " + random_word.upcase.green
         puts ""
         puts ""
         puts ""
@@ -835,19 +761,12 @@ class Graphic
     puts "------------------------------- \\"
     puts "|                             -| |"
     puts "| 1. SELECT/CREATE NEW USER   -| |"
-    puts "| 2. START PLAYING            -| |"        
-    puts "| 3. VIEW YOUR SCORES         -| |" 
+    puts "| 2. START PLAYING            -| |"
+    puts "| 3. VIEW YOUR SCORES         -| |"
     puts "| 4. VIEW LEADERBOARD         -| |"
     puts "| 5. QUIT                     -| |"
     puts "-------------------------------\\ |"
     puts "--------------------------------\\|"
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
     puts ""
         puts "  THE " + "HANGMAN ".yellow + "GAME"
         puts ""
