@@ -43,57 +43,6 @@ class GameFunctions < Graphic
     end
   end
 
-  def main_menu
-    puts ""
-    puts  "          MAIN MENU"
-    puts "------------------------------- \\"
-    puts "|                             -| |"
-    puts "| 1. SELECT/CREATE NEW USER   -| |"
-    puts "| 2. START PLAYING            -| |"        
-    puts "| 3. VIEW YOUR SCORES         -| |" 
-    puts "| 4. VIEW LEADERBOARD         -| |"
-    puts "| 5. QUIT                     -| |"
-    puts "-------------------------------\\ |"
-    puts "--------------------------------\\|"
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-        puts "  THE " + "HANGMAN ".yellow + "GAME"
-        puts ""
-        puts "        ❤".red + " = #{lives_left}"
-        puts "      __________"
-        puts "      |        |"
-        puts "      |        |"
-        puts "               |"
-        puts "      0".green + "        |"
-        puts "     \\|/".green + "       |"
-        puts "      |".green + "        |"
-        puts "     / \\".green + "       |"
-        puts "    ============"
-        puts "      "
-  end
-
-  def leaderboard
-    # binding.pry
-    sorted_users = users_in_memory.sort_by {|username, attributes| attributes["games_won"]}.reverse
-    puts "------------------------------------------"
-    puts "|USERNAME |    GAMES WON  |    GAMES LOST |"
-    i = 1
-    sorted_users.each do |key, values|
-      puts ""
-      puts "#{i.to_s} - " + key + "          " +"#{values['games_won']}".green + "            " + "#{values['games_lost']}".red+"        "
-      i += 1
-    end
-    sleep(3)
-    user_choice
-  end
-
-
   def reset
     self.random_word = random_word_generator
     @letters_guessed = []
@@ -111,105 +60,6 @@ class GameFunctions < Graphic
     6 - amount_wrong_turns
   end
 
-  def winner_message
-      puts "#{['YES!!', 'LET\'S GIT IT!!!', 'GIT OFF MY LAWN!!!', 'WOW! YOU\'RE AMAZING!'].sample}"
-      puts "       "
-  end
-
-  def loser_message
-      puts "#{['OOPS!', 'WRONG LETTER!', 'WRONG!', "BAD CHOICE!", 'INCORRECT!'].sample}"
-      puts "       "
-  end
-
-  def won_the_game
-        puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-
-    puts "                      YOU HAVE WON!".green
-    puts ""
-    puts ""
-    puts ""
-    puts "                       The word was"
-    puts ""
-    puts ""
-    puts "                        " + random_word.upcase.green    
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-
-    sleep(3)
-    hangman_graphic_won
-    display_lives_available
-    puts "       "
-    puts "THE WORD WAS:"
-    puts "       "
-    puts "            " + random_word.upcase.green
-    puts "       "
-    puts "       "
-    self.games_won += 1
-    reset
-    save_game
-    game_flow
-  end
-
-  def recurrent_message
-    # puts "PLEASE ENTER A LETTER TO BEGIN:"
-    puts space
-    puts "Here are the letters that you've guessed: #{self.letters_guessed} "
-    puts space
-    puts "        ❤".red + " = #{lives_left}"
-    hangman_graphic
-    puts "    "+ spaces
-  end
-
   def goodbye
     abort("GOODBYE".green)
   end
@@ -217,84 +67,6 @@ class GameFunctions < Graphic
   def action_input
     # ask user for 'save' or 'load' action
     @action_input = gets.chomp.downcase
-  end
-
-  def lost_the_game
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-
-    puts "                      YOU HAVE LOST".red
-    puts ""
-    puts ""
-    puts ""
-    puts "                       The word was"
-    puts ""
-    puts ""
-    puts "                        " + random_word.upcase.green    
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-
-    sleep(3)
-    hangman_graphic
-    puts space
-    
-    puts space
-    puts "    "
-    puts "YOU SHOULD TRY IT AGAIN!"
-    puts space
-    self.games_lost += 1
-    reset
-    save_game
-    game_flow
   end
 
   def game_won?
@@ -307,17 +79,12 @@ class GameFunctions < Graphic
     amount_wrong_turns >= 6
   end
 
-
   def increase_wrong_turns
       self.amount_wrong_turns += 1
   end
 
   def letter_exist?(user_letter)
     @random_word.include?(user_letter)
-  end
-
-  def display_lives_available
-    puts "       ♡".red + " = #{lives_left}"
   end
 
   def fill_in_spaces
@@ -347,21 +114,6 @@ class GameFunctions < Graphic
     guessed_letter_validator
     @user_input
   end
-
-  def space
-    "      "
-  end
-
-  def display_history
-    puts "Here's how many games you have WON: " + "#{self.games_won}".green
-    puts "Here's how many games you have LOST: " + "#{self.games_lost}".red
-  end
-
-  def invalid_message_restart
-    puts "YOUR ENTRY WAS INVALID, PLEASE TRY AGAIN"
-    user_choice
-  end
-
 
 def save_game
   # creates hash of instance attributes with values and
@@ -398,52 +150,6 @@ end
 
 def users_in_memory
   exsisting_memory = JSON.parse(IO.read('./config/memory.json'))
-end
-
-
-def game_stats
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts "---------------------"
-  puts "-                   -"
-  puts "    "+"#{self.user_name.upcase}".yellow + "       "
-  puts "-                   -"
-  puts "-                   -"
-  puts "-    GAMES WON      -"
-  puts "-        "+ "#{self.games_won}".green + "          -"
-  puts "-                   -"
-  puts "-    GAMES LOST     -"
-  puts "-        " + "#{self.games_lost}".red + "          -"
-  puts "-                   -"
-  puts "---------------------"
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-  puts ""
-
 end
 
 end
